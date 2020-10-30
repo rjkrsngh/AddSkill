@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cool Veggies</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="EcommerseJS.js"></script>
+  <link rel="stylesheet" type="text/css" href="EcommerseCSS.css">
+</head>
+
+<body>
+
+ <!--  <script>
+    
+      function saveSearch(){
+        //alert('searched');
+        let searchedItem = document.querySelector(".search-item").value;
+        alert(searchedItem);
+      }
+
+  </script> -->
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#"> <strong> Best Veggies </strong> </a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">Stores</a></li>
+          <li><a href="#">Contact</a></li>
+          <li> 
+            <div class="search-container">
+                <form>
+                  <input type="text" placeholder="Search.." name="search" class="search-item">
+                  <button class="submit-search" type="submit" onclick="saveSearch()"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+          </li>
+          <li>
+            <div class="dropdown">
+              <select class="filter-type" onchange="filterContentDropDown()">
+                <option>Fruits</option>
+                <option>Vegetables</option>
+                <option selected>Both</option>
+              </select>
+            </div>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div id="tomatoDiv" class="col-sm-4">
+        <div class="panel panel-primary vegetable tomato-panel" >
+          <div class="panel-heading">Tomatoes </div>
+          <div class="panel-body"><img src="cart Images/tomato.jpg" class="img-responsive"
+              style="width:100%; height: 250px;" alt="Image" onmouseover="mounseOnTomato()" onmouseout="mounseOutOnTomato()"></div>
+          <div class="panel-footer">
+            <a href="cart.html"> <button id="tomatoButton" type="button" class="btn btn-primary">Buy Tomatos</button> </a>
+          </div>
+        </div>
+      </div>
+      <div id="cucumberDiv" class="col-sm-4">
+        <div class="panel panel-primary vegetable cucumber-panel">
+          <div class="panel-heading">Cucumber</div>
+          <div class="panel-body"><img src="cart Images/cucumber.jpg" class="img-responsive"
+              style="width:100%;  height: 250px;" alt="Image" onmouseover="mounseOnCucumber()" onmouseout="mounseOutOnCucumber()"></div>
+          <div class="panel-footer">
+            <a href="cart.html"> <button id="cucumberButton" type="button" class="btn btn-primary">Buy Cucumbers</button> </a>
+          </div>
+        </div>
+      </div>
+      <div id="chillyDiv" class="col-sm-4">
+        <div class="panel panel-primary vegetable chilly-panel">
+          <div class="panel-heading">Chilli's</div>
+          <div class="panel-body"><img src="cart Images/chilli.jpg" class="img-responsive"
+              style="width:100%; height: 250px" alt="Image" onmouseover="mounseOnChilly()" onmouseout="mounseOutOnChilly()"></div>
+          <div class="panel-footer">
+            <a href="cart.html"> <button id="chilliButton" type="button" class="btn btn-primary">Buy Chillis</button> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4" id="strawberryDiv">
+        <div class="panel panel-primary fruit strawberry-panel">
+          <div class="panel-heading">Strawberry's </div>
+          <div class="panel-body"><img id="strawberyImg" src="cart Images/strawbery.jpg" class="img-responsive"
+              style="width:100%; height: 250px;" alt="Image" onmouseover="mounseOnStrawberry()" onmouseout="mounseOutOnStrawberry()"></div>
+          <div class="panel-footer">
+            <a href="cart.html"> <button id="strawBerryButton" type="button" class="btn btn-primary">Buy Strawberries</button> </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4" id="mangoDiv">
+        <div class="panel panel-primary fruit mango-panel">
+          <div class="panel-heading">Mango's</div>
+          <div class="panel-body"><img src="cart Images/mango.jpg" class="img-responsive"
+              style="width:100%;  height: 250px;" alt="Image" onmouseover="mounseOnMango()" onmouseout="mounseOutOnMango()"></div>
+          <div class="panel-footer">
+            <a href="cart.html"> <button id="mangoButton" type="button" class="btn btn-primary">Buy Mangoes</button> </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4" id="pineappleDiv">
+        <div class="panel panel-primary fruit pineapple-panel">
+          <div class="panel-heading">Pineapple's</div>
+          <div class="panel-body"><img src="cart Images/pineapple.jpg" class="img-responsive"
+              style="width:100%; height: 250px" alt="Image" onmouseover="mounseOnPineapple()" onmouseout="mounseOutOnPineapple()"></div>
+          <div class="panel-footer">
+            <a href="cart.html"> <button id="pineAppleButton" type="button" class="btn btn-primary">Buy Pineapples</button> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><br><br>
+
+  <footer class="container-fluid text-center">
+    <p>Online Store Copyright</p>
+    <form class="form-inline emailForm">Get deals:
+      <input type="email" class="form-control emailInput" size="50" placeholder="Email Address" onclick="clickEvent()">
+      <button type="button" class="btn btn-danger" onclick="validateEmail()">Sign Up</button>
+    </form>
+  </footer>
+
+</body>
+
+</html>

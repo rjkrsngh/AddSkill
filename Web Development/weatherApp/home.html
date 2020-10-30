@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>weather app</title>
+	<link rel="stylesheet" type="text/css" href="./weather.css">
+	<script type="text/javascript" src="./weather.js"></script>
+</head>
+<body onload="addEventListeners()">
+	<p>this is weather app</p>
+	<div>
+		<select onchange="print_city('state', this.selectedIndex);" id="sts" name ="stt" class="form-control" required></select>
+		<select id ="state" class="form-control" required></select>
+		<script language="javascript">print_state("sts");</script>
+		<button id="submit">send</button>
+	</div>
+
+	<div>
+		<p id="temp"> Temperature: <span id="tempValue">0</span>
+			<select id="format-selector" onchange="showTempInSelectedFormat()">
+				<option selected>Kelvin</option>
+				<option>Celcius</option>
+				<option>Farenheit</option>
+			</select> </p>
+	</div>
+</body>
+</html>

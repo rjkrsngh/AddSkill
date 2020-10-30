@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Portfolio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  	.button1{
+  		height: 50px;
+  		width: 100px;
+  	}
+  </style>
+</head>
+
+<body>
+	<!-- <button class = "button1" type="button">Click</button> -->
+	<a class="test" href="https:www.google.co.in" onclick="func()">Google</a>
+	<script>
+		function func(event){
+			event.preventDefault();
+			alert("dont click");
+		}
+
+		// let lazyRedirector = new Event("lazyRedirector");
+
+	</script>
+</body>
+
+<!-- <script>
+	
+	var jumbo = document.createElement("div");
+	jumbo.className = "jumbotron";
+
+	var divInJumbo = document.createElement("div");
+	divInJumbo.className = "container text-center";
+
+	var h1Elem = document.createElement("h1");
+	var text = document.createTextNode("My Portfolio");
+	h1Elem.append(text);
+
+	var paragraph = document.createElement("p");
+	var paraText = document.createTextNode("Some text that represents Me...")
+	paragraph.append(paraText);
+
+	divInJumbo.append(h1Elem);
+	divInJumbo.append(paragraph);
+
+	jumbo.append(divInJumbo);
+
+	document.querySelector('body').append(jumbo);
+
+</script> -->
+
+
+<!-- Create a button, onclick of this button create another button and append it below current button. On double click of current button, remove the added button. -->
+<!-- <script>
+	var button1 = document.createElement("button");
+	button1.type = "button";
+	button1.className = 'button1';
+	document.querySelector('body').append(button1);
+
+	button1.addEventListener(
+		"click",
+		function(evnet){
+				var button2 = document.createElement('button2');
+				button2.value = "button2";
+				button1.append(button2);
+			})
+
+</script>
+ -->
+<!-- Create a textbox, listen for key events, store whatever the user types, if user types his name, alert Hey. -->
+
+
+</html>

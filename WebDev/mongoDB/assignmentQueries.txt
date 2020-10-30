@@ -1,0 +1,151 @@
+DataBase Assignment
+
+Design a database to model the following data and queries. This will power a calorie counting application like MyFitnessPal 
+
+Data to add
+
+Note that this just represents the data that you need to store and not the exact design. You can have this data as part of same collection or in different collections.
+
+User
+
+Information about all the users on our app.
+
+{
+   "firstName":"Bhavesh",
+   "lastName":"Sharma",
+   "password":"ABNCxTY",
+   "calories_per_day":1800, // Maximum calorie per day as set by user.
+   "phone":"012345678",
+   "email":"bhavesh@gmail.com",
+   "username":"bhaveshs"
+}
+
+Meal
+
+Information about the meals added by different users in our app. A user can add as many meals as he wants in a day. Each meal item will have the following info.
+
+{
+   "datetime":"2020-12-20T16:00:00Z", // Date and time when the meal was consumed.
+   "food_name":"pasta", // Name of food.
+   "calorie":300, // Calorie contained in the food.
+   "description":"Red Sauce Pasta",
+   "_id":"123", // Unique Id for the entry, this could be the object ID (_id field) of mongoDB
+   "username": "bhaveshs" // User for which the entry is added.
+}
+
+Queries to support
+
+    Write a query to add users to our database. Username while adding a new user should be unique.
+
+    Write a query to delete user from our database based on the username (bhaveshs).
+
+    Write a query to update user fields like password, caloriesper_day, phone based on username(_bhaveshs).
+
+    Write a query to add a meal for a specific user based on the username (bhaveshs). Meal should have information as described in the meal object above.
+
+    Write a query to delete meal based on _id (123).
+
+    Write a query to delete all meals for a specific user as identified by the username (bhaveshs).
+
+    Write a query to list all meals for a specific user (bhaveshs).
+
+    Write a query to list all meals for a specific user (bhaveshs), on a given date (2020-12-20) , ordered by time.
+
+    Write a query which for a specific user (bhaveshs) for a specific date (2020-12-20), returns true if he has exceeded his daily limit and false otherwise (i.e true if sum of calories of all meals on that day > calories_per_day).
+
+
+
+solution queries
+1. db.users.insert(
+	{
+	   "firstName":"Bhavesh",
+	   "lastName":"Sharma",
+	   "password":"ABNCxTY",
+	   "calories_per_day":1800, 
+	   "phone":"012345678",
+	   "email":"bhavesh@gmail.com",
+	   "username":"bhaveshs",
+	   meals: [{
+		 "datetime":"2020-12-20T16:00:00Z",
+		 "food_name":"pasta",
+		 "calorie":300,
+		 "description":"Red Sauce Pasta"
+		}]
+	})
+
+	create an index on userName after pushing one document into the collection
+	db.users.createIndex({userName:1}, {unique: true})
+	
+2. db.users.remove({userName: "bhaveshs"})
+3. update password: db.users.update({userName:"rajk"}, {$set:{password:"iamGroot"}})
+   update calories_per_day: db.users.update({userName:"rajk"}, {$set:{calories_per_day:1400}})
+   update phoneNum: db.users.update({userName:"rajk"}, {$set:{phone:9898989898}})
+   
+4. add meals to user table
+	db.users.update({username: "bhaveshs"}, {$push: {meals:{
+		"datetime":"2020-12-20T16:00:00Z",
+		"food_name":"pasta",
+		"calorie":300,
+		"description":"Red Sauce Pasta"
+	}}})
+	
+5. Remove a meal based on meal id
+	db.meals.remove({"_id" : ObjectId("5fe95fe17c844e84252c05d5")})
+
+6. Remove all meals added by a user based on username
+	db.users.update({username:"bhaveshs"}, {$set:{meals:[]}})
+	
+7. Write a query to list all meals for a specific user (bhaveshs)
+	db.users.find({username: "bhaveshs"}, {meals:true}).pretty()
+	
+8. Write a query to list all meals for a specific user (bhaveshs), on a given date (2020-12-20) , ordered by time.
+	db.users.aggregate([
+	  { $match: { username: 'rjkrsngh' }},
+	  { $project: {
+		  meals: { $filter: {
+			  input: '$meals',
+			  as: 'meals',
+			  cond: {$and: [{ $gte: ['$$meals.datetime', ISODate("2020-12-21T00:00:00Z")]},
+							{ $lt: ['$$meals.datetime', ISODate("2020-12-22T00:00:00Z")]}
+						   ]}
+		  }},
+		  _id: 0,
+		  username: 1,
+		  calories_per_day:1
+	  }}
+	]);
+
+9. Write a query which for a specific user (bhaveshs) for a specific date (2020-12-20), 
+   returns true if he has exceeded his daily limit and false otherwise (i.e true if sum of calories of all meals on that day > calories_per_day).
+		function checkIfExceeded(){
+			var res =	db.users.aggregate([
+					  { $match: { username: 'rjkrsngh' }},
+					  { $project: {
+						  meals: { $filter: {
+							  input: '$meals',
+							  as: 'meals',
+							  cond: {$and: [{ $gte: ['$$meals.datetime', ISODate("2020-12-21T00:00:00Z")]},
+											{ $lt: ['$$meals.datetime', ISODate("2020-12-22T00:00:00Z")]}
+										   ]}
+						  }
+						  },
+						  _id: 0,
+						  username: 1,
+						  calories_per_day:1
+					  }}
+					]).toArray()
+			var sum=0;
+			for(let i=0; i<res[0].meals.length; i++){
+			 sum += res[0].meals[i].calorie;
+			}
+
+			var calorie_per_day = res[0].calories_per_day;
+			if(calorie_per_day<sum){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+
+	
